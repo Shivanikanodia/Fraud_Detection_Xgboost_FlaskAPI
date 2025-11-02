@@ -3,7 +3,7 @@
 
 #### Objective of the Project:
 
-The objective of this project is to build a predictive model that classifies whether a given transaction is fraudulent or legitimate. Detecting fraudulent transactions is critical in the financial and banking sectors to minimize monetary losses, protect customers, and maintain trust.
+The objective of this project is to build and deploy a predictive model that classifies whether a given transaction is fraudulent or legitimate. Detecting fraudulent transactions is critical in the financial and banking sectors to minimize monetary losses, protect customers, and maintain trust.
 
 ### Business Goal:
 
@@ -136,16 +136,33 @@ The model effectively reduced false positives to 6,000 and false negatives were 
 
 This plot ranks features by their average absolute SHAP value, which means:
 
-<img width="1582" height="1180" alt="output" src="https://github.com/user-attachments/assets/2d81c4b4-3e62-4ff0-92a0-76a67f63a65b" />
+<img width="783" height="860" alt="image" src="https://github.com/user-attachments/assets/e28f773c-36b0-4c38-9856-9969e41d803f" />
 
-The most influential feature — high transaction amounts push predictions strongly toward fraud. Smaller, routine amounts push the score toward non-fraud.
+Model is most driven by merchant category, transaction amount, and whether the card is present during the transaction — likely important indicators of fraud or transaction legitimacy.
 
-A valid CVV reduces fraud likelihood. A CVV mismatch adds strong positive SHAP values, meaning it increases fraud probability.
+**transactionAmount:**
 
-When the merchant’s country doesn’t match the card’s acquirer country, the model flags higher fraud risk (cross-border / unusual merchant behavior).
+Red points (high amounts) → mostly on the right → large amounts increase predicted risk (e.g., higher chance of fraud).
 
-Transactions occurring at night add positive SHAP contributions, indicating higher likelihood of fraud compared to daytime transactions.
+Blue points (low amounts) → on the left → lower amounts reduce the probability of fraud.
 
+**cardPresent:**
+
+Blue (card not present) on the right → non-present cards increase risk (typical of online fraud).
+
+Red (present) on the left → card present reduces risk.
+
+**currentBalance:**
+
+Red (high balance) → left → higher balances reduce risk.
+
+Blue (low balance) → right → low balances increase risk.
+
+**merchantCategoryCode_LE and merchantName_FE:**
+
+Both show wide spread → certain merchants or merchant categories strongly influence whether a transaction is classified as risky.
+
+---
 
 ### Which Models to Deploy in Production: 
 
@@ -167,6 +184,7 @@ Uber, Lyft, Ebay.com, Walmart, discount, Gap and Sears consistently appeared in 
 
 ### FUTURE WORK:
 
-- For future work, I’d deploy the model using FastAPI or Flask and manage it through MLflow or AWS SageMaker for versioning and scaling.
-- I’d set up model monitoring with tools like EvidentlyAI or WhyLabs to track drift, precision, and recall over time.
-- For explainability, I’d use SHAP or LIME to show key drivers behind each fraud prediction, improving transparency for business teams. 
+- Working to deploy the model using FastAPI  and manage it through AWS SageMaker for versioning and scaling.
+- Working on creating Streamlt UI Interface which will show  input boxes for Amount, merchant_name, Transaction_Hour etc and When user press “Check,” it sends those inputs to your FastAPI API and Displays the  prediction result on screen.
+- I’d set up model monitoring with tools like EvidentlyAI to track drift, precision, and recall over time.
+
