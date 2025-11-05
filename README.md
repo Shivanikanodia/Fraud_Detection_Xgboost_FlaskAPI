@@ -140,27 +140,19 @@ This plot ranks features by their average absolute SHAP value, which means:
 
 Model is most driven by merchant category, transaction amount, and whether the card is present during the transaction — likely important indicators of fraud or transaction legitimacy.
 
-**transactionAmount:**
-
-Red points (high amounts) → mostly on the right → large amounts increase predicted risk (e.g., higher chance of fraud).
+**transactionAmount:** : Red points (high amounts) → mostly on the right → large amounts increase predicted risk (e.g., higher chance of fraud).
 
 Blue points (low amounts) → on the left → lower amounts reduce the probability of fraud.
 
-**cardPresent:**
-
-Blue (card not present) on the right → non-present cards increase risk (typical of online fraud).
+**cardPresent:** : Blue (card not present) on the right → non-present cards increase risk (typical of online fraud).
 
 Red (present) on the left → card present reduces risk.
 
-**currentBalance:**
-
-Red (high balance) → left → higher balances reduce risk.
+**currentBalance:** : Red (high balance) → left → higher balances reduce risk.
 
 Blue (low balance) → right → low balances increase risk.
 
-**merchantCategoryCode_LE and merchantName_FE:**
-
-Both show wide spread → certain merchants or merchant categories strongly influence whether a transaction is classified as risky.
+**merchantCategoryCode_LE and merchantName_FE:**: Both show wide spread → certain merchants or merchant categories strongly influence whether a transaction is classified as risky.
 
 ---
 
@@ -170,9 +162,11 @@ XGBoost performs best for this problem, primarily because it achieves the lowest
 
 Missing a fraudulent transaction (false negative) can lead to substantial financial losses. Therefore, maximizing recall (0.69) — the proportion of actual frauds correctly identified — is critical. XGBoost successfully maximizes recall while still maintaining a reasonable balance with precision (0.4) for class 1. 
 
-Additionally, XGBoost’s ability to handle non-linear relationships, missing values, and class imbalance makes it a strong candidate for production deployment. Its performance consistency and scalability also make it suitable for real-time predictions in fraud detection systems.
-
 As a rollback option, Logistic Regression with a 0.5 threshold can serve as a backup model. Although it achieves slightly higher false positives, which could cause unnecessary alerts and damage customer trust.
+
+### Creating FlaskAPI for Inference Predictions:
+
+<img width="641" height="215" alt="Screenshot 2025-11-05 at 11 51 59" src="https://github.com/user-attachments/assets/06ff298c-5c05-4547-a2ef-b7cf33a478a6" />
 
 -----
 
