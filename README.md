@@ -101,10 +101,7 @@ I've created a pipeline for preprocessing, imputation, normalization and handlin
 
 ## Model Development and Evaluation: 
 
-### 1.Results from Logistic Regression with tuned Thresold:
-
-
-<img width="792" height="648" alt="Screenshot 2025-10-16 at 09 20 09" src="https://github.com/user-attachments/assets/d8011189-e647-465b-a82f-65d5c0604bf8" />
+### 1.Results from Logistic Regression with Tuned Thresold:
 
 The sklearn logisitc pipeline has encapsulated coulmn transformer, SMOTE to handle class imbalance, by creating synthetic samples of minority class and Logistic Regression serves as the final classifier with max_iter=1000 for convergence. 
 
