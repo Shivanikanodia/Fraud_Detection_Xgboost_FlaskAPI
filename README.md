@@ -34,6 +34,8 @@ To Provide an interface to Risk Team, banking system, or customer support team â
 
 1. Build Bar charts to Visualise Merchants Categories based on (Fraud Rate and Fraud Amountt), Channe - Pos_Entry_Model , (Spending patterns and High Velocity in transactions), Temporal trends (Transaction_hour, Is transaction happening at night and Time Since last transaction)  
 
+<img width="990" height="388" alt="image" src="https://github.com/user-attachments/assets/743d033e-1744-47de-a284-3f0e4e142985" />
+
 **INSIGHTS:** 
   
 1. IN AND OUT showed a high fraud rate even at moderate transaction volumes, indicating vulnerabilities at specific outlets.
@@ -60,29 +62,34 @@ Created sklearn logisitc pipeline has encapsulated coulmn transformer (Scaling a
 
 Stored performance metrics from log model like classfication report (F1, Precision and Recall) confusion matrix .
 
-Next, Moved to Xgboost for more complex model, implemented classifier using similar preoprocesor using scale_pos_weight, n_estimators, Max_depth, col_sample, sub_sample. 
+Next, Moved to Xgboost for more complex model, implemented classifier using similar preoprocesor using scale_pos_weight, n_estimators, Max_depth, col_sample, sub_sample.
+
+<img width="561" height="226" alt="Screenshot 2025-11-12 at 11 54 49" src="https://github.com/user-attachments/assets/7b191e69-39ec-46a2-9722-a40b9b51e71c" />
+
+
+<img width="561" height="226" alt="Screenshot 2025-11-12 at 11 54 49" src="https://github.com/user-attachments/assets/1ae6485c-0826-4105-bed5-b839c4f825b9" />
+
 
 ##  Model Deployment and Model Hosting:
 
-Saved the XGBoost model as a .pkl file since it provided the best balance between precision and recall. Developed a lightweight API service to accept new inputs and return predictions instantly, and deployed it on AWS Elastic Beanstalk to monitor logs, thresholds, and performance drifts.
+Saved the XGBoost model as a .pkl file since it provided the best balance between precision and recall. Developed a lightweight API service to accept new inputs and return predictions instantly, would deployed it on AWS Elastic Beanstalk soon to monitor logs, thresholds, and performance drifts.
 
 The deployment pipeline extends the training pipeline and implements a continuous deployment workflow. It preps the input data, trains a model, and  return predictions. 
 
 ------
 
-### SHAP for feature contribution towards prediction:
+### Feature Importance for feature contribution towards prediction:
 
-This plot ranks features by their average absolute SHAP value, which means:
-
-<img width="783" height="860" alt="image" src="https://github.com/user-attachments/assets/e28f773c-36b0-4c38-9856-9969e41d803f" />
+Provides which features contributed most toward our target, it uses split of decisions tress and where the information gain was maximum with min loss. 
 
 Model is most driven by merchant category, transaction amount and spending patterns, and whether the card is present during the transaction â€” likely important indicators of fraud or transaction legitimacy.
 
 ---
 
-**Merchants and Peak Hours to Watch out:**
+**Merchants, Compromised Acccounts and Peak Hours to Watch out:**
 
 Uber, Lyft, Ebay.com, Walmart, discount, Gap and Sears consistently appeared in list where Fraud transaction volume were high. This evidented from the temporal analysis where hours like 12:00 AM, 01:00 AM and 03:00 AM were targeted mostly and these specific merchants showed fraudulent activity indicating low monitoring hours or bot testing.
+Some Account Numbers appeared consistently among these hours for similar merchants, Requires deliberate monitoring and strong verification.  
 
 ### FUTURE WORK:
 
