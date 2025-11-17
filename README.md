@@ -1,5 +1,5 @@
 
-## Identifying Fraudulent Transactions:
+## FRAUD DETECTION MODEL (TRAIN, TEST AND DEPLOY):
 
 ### OBJECTIVE:
 
@@ -19,6 +19,19 @@ To Provide an interface to Risk Team, banking system, or customer support team �
 4. **Model Selection, Model Traning and Model Evaluation:**
 5. **Model Deployement and Model Hosting:**
 6. **Model Perfomance Monitoring and Data drift tracking:**
+
+____
+
+**THE FOLLOWING ASSUMPTIONS HAVE BEEN MADE ON  DATA:**
+
+- I've assumed that transaction timestamps, Account IDs, and amounts are accurate.
+- Labels for “fraud” and “non-fraud” are correctly assigned.
+- Data from different systems POS Modes are aligned by same AccountID.
+- Model errors are random, not systematically biased toward certain user groups.
+- Real-time transactions reflect similar dynamics as training data.
+- No major policy or product changes occurred mid-dataset that affect fraud patterns
+
+---- 
 
 ## Data Collection and Preparation:
 
