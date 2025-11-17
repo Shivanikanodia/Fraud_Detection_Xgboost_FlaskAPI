@@ -26,10 +26,10 @@ ____
 
 - I've assumed that transaction timestamps, Account IDs, and amounts are accurate.
 - Labels for “fraud” and “non-fraud” are correctly assigned.
-- Data from different systems POS Modes are aligned by same AccountID.
+- Data from different Channels **POS Modes** are aligned by same AccountID.
 - Model errors are random, not systematically biased toward certain user groups.
 - Real-time transactions reflect similar dynamics as training data.
-- No major policy or product changes occurred mid-dataset that affect fraud patterns
+- No major policy or product changes occurred mid-dataset that affect fraud patterns.
 
 ---- 
 
