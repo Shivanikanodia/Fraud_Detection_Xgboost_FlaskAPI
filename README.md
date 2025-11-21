@@ -93,6 +93,8 @@ Saved the XGBoost model as a .pkl file since it provided the best balance betwee
 
 The deployment pipeline extends the training pipeline and implements a continuous deployment workflow. It preps the input data, trains a model, and  return predictions. 
 
+
+<img width="1282" height="430" alt="image" src="https://github.com/user-attachments/assets/5e837d58-88b0-4a6a-8375-fbf5083d4a6a" />
 ------
 
 ### Feature Importance for feature contribution towards prediction:
@@ -129,4 +131,7 @@ Retain inference logs with trace IDs to training rows (data lineage).
 
 Privacy: redact PII, tokenize identifiers.
 
+### Files Requirement for Project:
+
+<img width="433" height="487" alt="Screenshot 2025-11-10 at 14 36 48" src="https://github.com/user-attachments/assets/19d06748-af75-4335-9d4d-ed050510d95a" />
 
