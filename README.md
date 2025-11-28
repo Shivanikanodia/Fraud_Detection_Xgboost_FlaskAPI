@@ -38,6 +38,8 @@ ____
 - The dataset contained 700,000 rows and 28 features with mixed data types. It was received in JSON format and processed using the JSONLines library.
 
 - The dataset was checked for missing values using the isnull().sum() function and for empty strings and whitespace characters using regular expressions (Regex).
+  
+- In Fraud Dtection, missing values are itself signal of fraud, so in our case usefeful candidates like cardCVV, enteredCVV, posEntryMode, posConditionCode, merchantState, merchantCountryCode, merchantName, acqCountry, recurringAuthInd, cardPresent, transactionType and merchantCategoryCode has missing values which  
 
 - The nunique() function in Python was used to detect unique value distribution and category diversity.
 
@@ -76,13 +78,13 @@ Built bar charts to visualize merchant categories by fraud rate and fraud amount
 
 ### Model Selection, Model Traning and Model Evaluation:
 
-- Logistic Regression was selected as the base model due to its interpretability and ability to provide clear feature coefficients for understanding feature importance.
+- Xgboost was selected as the base model due to its interpretability and ability to deal with complex features. 
 
-Built a Scikit-learn pipeline that encapsulated, ColumnTransformer for scaling and preprocessing, SMOTE to address class imbalance by generating synthetic samples of the minority class, and Logistic Regression as the final classifier (max_iter=1000 for convergence).
+Built a Scikit-learn pipeline that encapsulated, ColumnTransformer for scaling and preprocessing, scale_pos to address class imbalance. 
 
 Collected model performance metrics including classification report (Precision, Recall, F1-score) and confusion matrix for evaluation.
 
-Subsequently, implemented a more complex model using XGBoost, applying a similar preprocessing setup and tuning hyperparameters such as scale_pos_weight, n_estimators, max_depth, colsample_bytree, and subsample for optimal performance.
+Subsequently, implemented a more complex model using , applying a similar preprocessing setup and tuning hyperparameters such as scale_pos_weight, n_estimators, max_depth, colsample_bytree, and subsample for optimal performance.
 
 <img width="1536" height="1024" alt="162eef2e-8119-4c61-a8af-46b3493df58d" src="https://github.com/user-attachments/assets/4defe221-403e-4e4e-9488-938135f62552" />
 
