@@ -8,7 +8,7 @@ The objective of this project is to build and productionize a predictive model t
 ### GOAL:
 
 Maximize fraud detection accuracy (high recall) while maintaining a low false positive rate (balanced precision-recall trade-off). 
-To Provide an interface to Risk Team, banking system, or customer support team — whoever is using the model.
+To Provide an interface to Risk Team, banking system.
 
 ---- 
 ### STEPS:
@@ -16,9 +16,8 @@ To Provide an interface to Risk Team, banking system, or customer support team �
 1. **Data Collection and Preparation:**
 2. **Exploratory Data Analysis:**
 3. **Data Preprocessing and Feature Engineering:**
-4. **Model Selection, Model Traning and Model Evaluation:**
+4. **Model Selection, Model Training and Model Evaluation:**
 5. **Model Deployement and Model Hosting:**
-6. **Model Perfomance Monitoring and Data drift tracking:**
 
 ____
 
@@ -39,8 +38,6 @@ ____
 
 - The dataset was checked for missing values using the isnull().sum() function and for empty strings and whitespace characters using regular expressions (Regex).
   
-- In Fraud Dtection, missing values are itself signal of fraud, so in our case usefeful candidates like cardCVV, enteredCVV, posEntryMode, posConditionCode, merchantState, merchantCountryCode, merchantName, acqCountry, recurringAuthInd, cardPresent, transactionType and merchantCategoryCode has missing values which  
-
 - The nunique() function in Python was used to detect unique value distribution and category diversity.
 
 - The pd.to_datetime() function was applied to convert datetime columns stored as strings into proper date objects (TransactionDateTime, AccountOpenDate, ExpiryDate).
@@ -91,9 +88,11 @@ Subsequently, implemented a more complex model using , applying a similar prepro
 
 ##  Model Deployment and Model Hosting:
 
-Saved the XGBoost model as a .pkl file since it provided the best balance between precision and recall. Developed a lightweight API service to accept new inputs and return predictions instantly, as a future step would deployed it on AWS Elastic Beanstalk soon to monitor logs, thresholds, and performance drifts.
+Saved the XGBoost model as a .pkl file since it provided the best balance between precision and recall. Developed a lightweight API service to accept new inputs and return predictions instantly and packaged using dockerfile to put in on cloud. 
 
-The deployment pipeline extends the training pipeline and implements a continuous deployment workflow. It preps the input data, trains a model, and  return predictions. 
+The deployment pipeline extends the training pipeline and implements a continuous deployment workflow. It preps the input data, trains a model, and  return predictions.
+
+The FastAPI layer strictly validates schema and enforces feature ordering to prevent training–serving skew using pydantic.
 
 
 <img width="1282" height="430" alt="image" src="https://github.com/user-attachments/assets/5e837d58-88b0-4a6a-8375-fbf5083d4a6a" />
@@ -101,29 +100,28 @@ The deployment pipeline extends the training pipeline and implements a continuou
 
 ### Feature Importance for feature contribution towards prediction:
 
-Performed Feature Importance  which features contributed most toward our target. It uses split of decisions tress, where the information gain was maximum with min loss. 
+Performed Feature Importance  which features contributed most toward our target. It used split of decisions tress, where the information gain was maximum with min loss. 
 
-As a result, model iwas most driven by merchant category, transaction amount and spending patterns, and whether the card is present during the transaction — likely important indicators of fraud or transaction legitimacy.
+As a result, model was mosttly driven by merchant category, transaction amount, transaction hour, Card Present or Not AND Daily transaction Count — likely important indicators of fraud or transaction legitimacy.
 
 ---
 
 **Merchants, Compromised Acccounts and Peak Hours to Watch out:**
 
-Uber, Lyft, Ebay.com, Walmart, discount, Gap and Sears consistently appeared in list where Fraud transaction volume were high. This evidented from the temporal analysis where hours like 12:00 AM, 01:00 AM and 03:00 AM were targeted mostly and these specific merchants showed fraudulent activity indicating low monitoring hours or bot testing.
-Some Account Numbers appeared consistently among these hours for similar merchants, Requires deliberate monitoring and strong verification.  
+- As result Uber, Lyft, Ebay.com, Walmart, discount, Gap and Sears consistently appeared in list where Fraud transaction volume were high. This evidented from the temporal analysis where hours like 12:00 AM, 01:00 AM and 03:00 AM were targeted mostly and these specific merchants showed fraudulent activity indicating low monitoring hours or bot testing.
+- Some Account Numbers appeared consistently among these hours for similar merchants, Requires deliberate monitoring and strong verification.  
 
 ### FUTURE WORK:
 
 - Working on creating AI agent Interface which help risk team and customers to understand if transaction is fraudulent by inputing Case details like Transaction_id, Transaction_Amount, Merchant_name, Transaction_Hour, Merchant_Location, Channel.
-- AI would use SHAP Explainations and sends those inputs to your API Endpoint and will respond based on model behaviour, ensuring sensitivty, data privacy and compliance.
+- AI would use SHAP Explainations and sends those inputs to API Endpoint and will respond based on model behaviour, ensuring sensitivty, data privacy and compliance.
 
 **1.Monitoring & Observability:**
 
 Performance: accuracy/precision/recall/PR-AUC 
 
-Data: schema/volume drift, feature drift, label drift (once labels arrive).
+Data: schema/volume drift and label drift (once labels arrive).
 
-Ops: latency, throughput, error rate, timeouts, dependency health.
 
 **2. Logging & Audit:**
 
